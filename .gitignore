@@ -4,3 +4,7 @@
 !*.cc
 !Makefile
 !*.md
+!slides/*.tex
+!slides/*.sty
+!slides/img/*.pdf
+

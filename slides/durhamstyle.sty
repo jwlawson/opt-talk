@@ -1,0 +1,113 @@
+\makeatletter
+\RequirePackage[T1]{fontenc}
+\RequirePackage{lmodern}
+\renewcommand*{\familydefault}{\sfdefault}
+\definecolor{palatinate}{HTML}{7E317B}
+\definecolor{pallight}{HTML}{D8ACE0}
+\setbeamercolor{structure}{fg=white,bg=palatinate}
+\setbeamercolor{block title}{bg=}
+\setbeamercolor{block body}{bg=pallight!50!white}
+\setbeamerfont{structure}{series=\bfseries}
+
+\setlength{\parskip}{0.5\baselineskip}
+\setbeamertemplate{navigation symbols}{}
+
+\setbeamercolor{note page}{bg=white, fg=black}
+\setbeamercolor{note title}{bg=white!95!black, fg=black}
+\setbeamercolor{itemize item}{fg=black}
+\setbeamertemplate{itemize item}{\raisebox{0.25ex}{\footnotesize\textbullet}}
+\newcommand\titlegraphicii[1]{\def\inserttitlegraphicii{#1}}
+\titlegraphicii{}
+\setbeamertemplate{title page}{%
+	\vbox{}%
+	\vskip-\baselineskip%
+  \begingroup%
+		\@tempdima=\textwidth%
+		\advance\@tempdima by\beamer@leftmargin%
+		\advance\@tempdima by\beamer@rightmargin%
+		\@tempdimb=0.75\paperheight%
+    \begin{beamercolorbox}[sep=14pt,center,wd=\the\@tempdima,ht=\the\@tempdimb]{title}
+			{\usebeamerfont{title}\inserttitle\par}%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%
+			{\usebeamercolor{author}\usebeamerfont{author}\insertauthor\par}\vskip1em%
+			{\usebeamercolor{institute}\usebeamerfont{institute}\insertinstitute\par}\vskip1em%
+			{\usebeamercolor{date}\usebeamerfont{date}\insertdate\par}%
+    \end{beamercolorbox}%
+  \endgroup
+	\vfill
+	{\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\hfill\inserttitlegraphicii}
+  \vfill
+}
+\setbeamertemplate{frametitle}{%
+	\vskip-0.1em
+	\begin{beamercolorbox}[wd=\paperwidth,center]{frametitle}%
+		\vbox to 2cm{%
+			\vfil%
+			\insertframetitle{}%
+
+			\small\insertframesubtitle{}%
+			\vfil%
+		}
+	\end{beamercolorbox}
+}
+\setbeamertemplate{block begin}{%
+  \par%
+  \begin{beamercolorbox}[colsep*=.75ex]{block title}
+    \usebeamerfont*{block title}\insertblocktitle%
+  \end{beamercolorbox}%
+  {\parskip0pt\par}%
+  \ifbeamercolorempty[bg]{block title}
+  {}
+  {\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
+  \usebeamerfont{block body}%
+  \begin{beamercolorbox}[colsep*=.75ex,vmode]{block body}%
+    \ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+}
+\setbeamertemplate{block end}{\end{beamercolorbox}}
+\setbeamertemplate{theorem begin}{%
+	\begin{\inserttheoremblockenv}{}%
+	{%
+	\inserttheoremheadfont
+	\vspace{-\parskip}\inserttheoremname
+	%\inserttheoremnumber
+	\ifx\inserttheoremaddition\@empty\else\ (\inserttheoremaddition)\fi%
+	\inserttheorempunctuation
+	}%
+	\hspace{0.25em}%
+}
+\setbeamertemplate{theorem end}{\end{\inserttheoremblockenv}}
+
+\setbeamercolor{bibliography entry author}{fg=palatinate}
+\setbeamercolor{bibliography entry location}{fg=palatinate!75!white}
+\setbeamercolor{bibliography entry note}{fg=palatinate!75!white}
+\setbeamertemplate{bibliography item}{}
+\setbeamertemplate{bibliography entry author}{}
+\setbeamertemplate{bibliography entry title}{}
+\setbeamertemplate{bibliography entry location}{}
+\setbeamertemplate{bibliography entry note}{}
+\RequirePackage{tikz}
+\newcommand*{\DivideLengths}[2]{%
+  \strip@pt\dimexpr\number\numexpr\number\dimexpr#1\relax*65536/\number\dimexpr#2\relax\relax sp\relax
+}
+\setbeamertemplate{footline}{\leavevmode%
+\@tempdima=\inserttotalframenumber pt%
+% Don't want to divide by 0, so don't do anything if number of frames is 1.
+\ifdim\@tempdima<2pt%
+\else%
+	\begin{tikzpicture}
+		\useasboundingbox (0,0) rectangle(\the\paperwidth,.2);
+		\@tempdima=\DivideLengths{\the\textwidth}{\inserttotalframenumber pt - 1pt}pt%
+		\@tempdimb=\insertframenumber\@tempdima%
+		\addtolength{\@tempdimb}{-\@tempdima}%
+		\fill[color=pallight](\the\@tempdimb,0) circle (1.4mm);
+		\fill[color=palatinate](\the\@tempdimb,0) circle (0.7mm);
+		\fill[color=palatinate](0,0) rectangle (\the\@tempdimb,.05);
+	\end{tikzpicture}%
+\fi%
+}
+\setlength{\parskip}{\baselineskip}
+\makeatother
