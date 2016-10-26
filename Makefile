@@ -7,9 +7,9 @@ CXXFLAGS += -I$(HOME)/include
 
 LDFLAGS += -L$(HOME)/lib
 
-.PHONY: all clean cleanswap cleanacc
+.PHONY: all clean cleanswap cleanacc cleanmut
 
-all: swap_bench swap_test acc_bench acc_test
+all: swap_bench swap_test acc_bench acc_test mutate_bench
 
 %_bench: LDLIBS=-lbenchmark -pthread
 
@@ -21,4 +21,7 @@ cleanswap:
 cleanacc:
 	$(RM) acc_bench acc_test
 
-clean: cleanswap cleanacc
+cleanmut:
+	$(RM) mutate_bench
+
+clean: cleanswap cleanacc cleanmut
